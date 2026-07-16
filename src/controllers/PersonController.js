@@ -3,10 +3,10 @@ const PersonServices = require("../services/PersonService.js");
 
 const personServices = new PersonServices();
 
-class PessoaController extends Controller {
+class PersonController extends Controller {
     constructor() {
         super(personServices);
     }
 }
 
-module.exports = PessoaController;
+module.exports = PersonController;

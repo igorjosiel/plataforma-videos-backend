@@ -13,6 +13,22 @@ class Controller {
         }
     }
 
+    async getById(req, res) {
+        const { id } = req.params;
+
+        try {
+            const foundPerson = await this.entityService.getRegisterById(Number(id));
+
+            if (foundPerson) {
+                return res.status(200).json(foundPerson);
+            }
+
+            return res.status(404).json({ message: "Pessoa não encontrada." });
+        } catch (error) {
+
+        }
+    }
+
     async update(req, res) {
         const { id } = req.params;
         const updatedData = req.body;

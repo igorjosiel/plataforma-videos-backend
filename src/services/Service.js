@@ -9,6 +9,10 @@ class Services {
         return dataSource[this.model].findAll();
     }
 
+    async getRegisterById(id) {
+        return dataSource[this.model].findByPk(id);
+    }
+
     async updateRegister(updatedData, id) {
         const updatedRegistersList = dataSource[this.model].update(
             updatedData,
