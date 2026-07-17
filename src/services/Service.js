@@ -13,6 +13,16 @@ class Services {
         return dataSource[this.model].findByPk(id);
     }
 
+    async createRegister(personData) {
+        const createdRegister = await dataSource[this.model].create(personData);
+        
+        if (createdRegister[0] === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     async updateRegister(updatedData, id) {
         const updatedRegistersList = await dataSource[this.model].update(
             updatedData,

@@ -9,7 +9,7 @@ class Controller {
             
             return res.status(200).json(registersList);
         } catch (error) {
-
+            // Erro
         }
     }
 
@@ -25,7 +25,23 @@ class Controller {
 
             return res.status(404).json({ message: "Pessoa não encontrada." });
         } catch (error) {
+            // Erro
+        }
+    }
 
+    async create(req, res) {
+        const { name, email, cpf, active, role } = req.body;
+
+        try {
+            const wasCreated = await this.entityService.createRegister({ name, email, cpf, active, role });
+
+            if (!wasCreated) {
+                return res.status(400).json({ message: "Registro não cadastrado." });
+            }
+
+            return res.status(200).json({ message: "Criado com sucesso." });
+        } catch (error) {
+            // Erro
         }
     }
 
@@ -42,7 +58,7 @@ class Controller {
 
             return res.status(200).json({ message: "Atualizado com sucesso." });
         } catch (error) {
-            // erro
+            // Erro
         }
     }
 
