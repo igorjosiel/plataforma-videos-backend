@@ -37,12 +37,28 @@ class Controller {
             const wasUpdated = await this.entityService.updateRegister(updatedData, Number(id));
 
             if (!wasUpdated) {
-                return res.status(400).json({ message: "Registro não foi atualizado." });
+                return res.status(400).json({ message: "Registro não atualizado. Id inválido." });
             }
 
             return res.status(200).json({ message: "Atualizado com sucesso." });
         } catch (error) {
             // erro
+        }
+    }
+
+    async delete(req, res) {
+        const { id } = req.params;
+
+        try {
+            const wasDeleted = await this.entityService.deleteRegister(Number(id));
+
+            if (!wasDeleted) {
+                return res.status(400).json({ message: "Registro não removido. Id inválido." });
+            }
+
+            return res.status(200).json({ message: "Removido com sucesso." });
+        } catch (error) {
+            // Erro
         }
     }
 }

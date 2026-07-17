@@ -14,7 +14,7 @@ class Services {
     }
 
     async updateRegister(updatedData, id) {
-        const updatedRegistersList = dataSource[this.model].update(
+        const updatedRegistersList = await dataSource[this.model].update(
             updatedData,
             {
                 where: { id: id }
@@ -22,6 +22,18 @@ class Services {
         );
 
         if (updatedRegistersList[0] === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    async deleteRegister(id) {
+        const deletedRegistersList = await dataSource[this.model].destroy({
+            where: { id: id }
+        });
+
+        if (deletedRegistersList === 0) {
             return false;
         }
 
