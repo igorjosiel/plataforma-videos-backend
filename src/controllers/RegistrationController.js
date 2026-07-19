@@ -3,10 +3,10 @@ const RegistrationServices = require("../services/RegistrationServices.js");
 
 const registrationServices = new RegistrationServices();
 
-class CategoryController extends Controller {
+class RegistrationController extends Controller {
     constructor() {
         super(registrationServices);
     }
 }
 
-module.exports = CategoryController;
+module.exports = RegistrationController;

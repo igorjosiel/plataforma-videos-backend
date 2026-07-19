@@ -17,10 +17,10 @@ class Controller {
         const { id } = req.params;
 
         try {
-            const foundPerson = await this.entityService.getRegisterById(Number(id));
+            const foundRegister = await this.entityService.getRegisterById(Number(id));
 
-            if (foundPerson) {
-                return res.status(200).json(foundPerson);
+            if (foundRegister) {
+                return res.status(200).json(foundRegister);
             }
 
             return res.status(404).json({ message: "Pessoa não encontrada." });
@@ -30,10 +30,10 @@ class Controller {
     }
 
     async create(req, res) {
-        const { name, email, cpf, active, role } = req.body;
+        const data = req.body;
 
         try {
-            const wasCreated = await this.entityService.createRegister({ name, email, cpf, active, role });
+            const wasCreated = await this.entityService.createRegister(data);
 
             if (!wasCreated) {
                 return res.status(400).json({ message: "Registro não cadastrado." });
