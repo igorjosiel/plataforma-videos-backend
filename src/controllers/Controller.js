@@ -9,7 +9,7 @@ class Controller {
             
             return res.status(200).json(registersList);
         } catch (error) {
-            // Erro
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -25,7 +25,7 @@ class Controller {
 
             return res.status(404).json({ message: "Pessoa não encontrada." });
         } catch (error) {
-            // Erro
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -41,7 +41,7 @@ class Controller {
 
             return res.status(200).json({ message: "Criado com sucesso." });
         } catch (error) {
-            // Erro
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -58,7 +58,7 @@ class Controller {
 
             return res.status(200).json({ message: "Atualizado com sucesso." });
         } catch (error) {
-            // Erro
+            return res.status(500).json({ error: error.message });
         }
     }
 
@@ -74,7 +74,7 @@ class Controller {
 
             return res.status(200).json({ message: "Removido com sucesso." });
         } catch (error) {
-            // Erro
+            return res.status(500).json({ error: error.message });
         }
     }
 }
