@@ -26,6 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Person',
     tableName: "people",
     paranoid: true,
+    defaultScope: {
+      where: {
+        active: true,
+      }
+    },
+    scopes:{
+      allPeople: {
+        where: {}
+      }
+    }
   });
   return Person;
 };
