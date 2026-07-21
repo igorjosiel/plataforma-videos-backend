@@ -1,4 +1,6 @@
 'use strict';
+const isCpfValid = require("../../utils/validateCpfHelper.js");
+
 const {
   Model
 } = require('sequelize');
@@ -16,9 +18,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Person.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    cpf: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [3, 30],
+          msg: "O campo nome deve ter no mínimo 3 caracteres."
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          msg:"Formato de e-mail inválido."
+        }
+      }
+    },
+    cpf: {
+      type: DataTypes.STRING,
+      validate: {
+        isCpfValid: (cpf) => {
+          if (!isCpfValid(cpf)) throw new Error("Número de CPF inválido.");
+        }
+      }
+    },
     active: DataTypes.BOOLEAN,
     role: DataTypes.STRING
   }, {
