@@ -8,11 +8,23 @@ class PersonController extends Controller {
         super(personServices);
     }
 
-    async getRegistrations(req, res) {
+    async getActiveRegistrations(req, res) {
         const { studentId } = req.params;
 
         try {
-            const registrationsList = await personServices.getRegistrationsByStudent(Number(studentId));
+            const registrationsList = await personServices.getActiveRegistrationsByStudent(Number(studentId));
+
+            return res.status(200).json(registrationsList);
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
+    async getAllRegistrations(req, res) {
+        const { studentId } = req.params;
+
+        try {
+            const registrationsList = await personServices.getAllRegistrationsByStudent(Number(studentId));
 
             return res.status(200).json(registrationsList);
         } catch (error) {
