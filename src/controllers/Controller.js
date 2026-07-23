@@ -1,3 +1,5 @@
+const converterIds = require("../utils/converterStringHelper");
+
 class Controller {
     constructor(entityService) {
         this.entityService = entityService;
@@ -29,6 +31,23 @@ class Controller {
         }
     }
 
+    async getOne(req, res) {
+        const { ...params } = req.params;
+        const where = converterIds(params);
+        
+        try {
+            const foundRegister = await this.entityService.getOneRegister(where);
+
+            if (foundRegister) {
+                return res.status(200).json(foundRegister);
+            }
+
+            return res.status(404).json({ message: "Pessoa não encontrada." });
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    }
+
     async create(req, res) {
         const data = req.body;
 
@@ -46,11 +65,13 @@ class Controller {
     }
 
     async update(req, res) {
-        const { id } = req.params;
+        const { ...params } = req.params;
         const updatedData = req.body;
+
+        const where = converterIds(params);
         
         try {
-            const wasUpdated = await this.entityService.updateRegister(updatedData, Number(id));
+            const wasUpdated = await this.entityService.updateRegister(updatedData, where);
 
             if (!wasUpdated) {
                 return res.status(400).json({ message: "Registro não atualizado. Id inválido." });

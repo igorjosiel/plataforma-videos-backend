@@ -13,8 +13,8 @@ class Services {
         return dataSource[this.model].scope(scope).findAll();
     }
 
-    async getRegisterById(id) {
-        return dataSource[this.model].findByPk(id);
+    async getOneRegister(where) {
+        return dataSource[this.model].findOne({ where: { ...where } });
     }
 
     async createRegister(data) {
@@ -27,11 +27,11 @@ class Services {
         return true;
     }
 
-    async updateRegister(updatedData, id) {
+    async updateRegister(updatedData, where) {
         const updatedRegistersList = await dataSource[this.model].update(
             updatedData,
             {
-                where: { id: id }
+                where: { ...where }
             }
         );
 

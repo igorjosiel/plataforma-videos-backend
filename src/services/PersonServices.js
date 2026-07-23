@@ -6,14 +6,14 @@ class PersonServices extends Services {
     }
 
     async getActiveRegistrationsByStudent(id) {
-        const student = await super.getRegisterById(id);
+        const student = await super.getOneRegister(id);
         const registrationsList = await student.getActiveRegistrations();
 
         return registrationsList;
     }
 
     async getAllRegistrationsByStudent(id) {
-        const student = await super.getRegisterById(id);
+        const student = await super.getOneRegister(id);
         const registrationsList = await student.getAllRegistrations();
 
         return registrationsList;
